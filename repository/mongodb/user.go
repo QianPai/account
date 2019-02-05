@@ -2,8 +2,8 @@ package mongodb
 
 import (
 	"context"
-	"github.com/GordonChen13/QianPaiRen/account/model"
-	"github.com/GordonChen13/QianPaiRen/account/repository"
+	"github.com/QianPai/account/model"
+	"github.com/QianPai/account/repository"
 	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"log"

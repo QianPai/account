@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"github.com/GordonChen13/QianPaiRen/src/account/model"
+	"github.com/QianPai/account/model"
 )
 
 type User interface {

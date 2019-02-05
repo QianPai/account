@@ -1,4 +1,4 @@
-module github.com/GordonChen13/QianPaiRen/account
+module github.com/QianPai/account
 
 require (
 	github.com/go-stack/stack v1.8.0 // indirect

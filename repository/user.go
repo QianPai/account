@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"github.com/GordonChen13/QianPaiRen/account/model"
+	"github.com/QianPai/account/model"
 )
 
 type User interface {

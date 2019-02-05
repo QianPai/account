@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/GordonChen13/QianPaiRen/account/repository/mongodb"
+	"github.com/QianPai/account/repository/mongodb"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/mongo/readpref"
 	"github.com/sirupsen/logrus"
