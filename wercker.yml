@@ -16,7 +16,7 @@ box: golang
 
   # - mongo
 # https://devcenter.wercker.com/administration/services/examples/mongodb/
-dev:
+build:
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
   # Read more about steps on our dev center:
