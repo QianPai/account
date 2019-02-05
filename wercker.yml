@@ -35,8 +35,14 @@ build:
 
     # Gets the dependencies
     - script:
+        name: go build
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go build
+
+    # Gets the dependencies
+    - script:
         name: go run
         code: |
           cd $WERCKER_SOURCE_DIR
-          go version
-          go run main.go
+          ./account
