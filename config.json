@@ -1,0 +1,18 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":8080"
+  },
+  "context":{
+    "timeout":2
+  },
+  "database": {
+    "drivier": "mongodb"
+    "host": "localhost",
+    "port": "27017",
+    "user": "user",
+    "pass": "password",
+    "name": "users"
+  }
+
+}
