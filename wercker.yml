@@ -38,7 +38,8 @@ build:
         name: go build
         code: |
           cd $WERCKER_SOURCE_DIR
-          go build
+          export GO111MODULE=on
+          go build ./...
 
     # Gets the dependencies
     - script:
