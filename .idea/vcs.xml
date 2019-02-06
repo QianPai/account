@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.wercker/builds/5c5a3dc8c07a9519bef6efc8/source" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.wercker/projects/account" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.wercker/projects/account-1b0f6329-77a9-4cb1-9f6c-dc0e117ed4ae" vcs="Git" />
   </component>
 </project>
