@@ -13,7 +13,7 @@ type user struct {
 	Client *mongo.Client
 }
 
-func New(client *mongo.Client) repository.User  {
+func NewUserRepository(client *mongo.Client) repository.User  {
  	return &user{client}
 }
 

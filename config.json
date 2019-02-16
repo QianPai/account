@@ -7,9 +7,9 @@
     "timeout":2
   },
   "database": {
-    "drivier": "mongodb"
+    "drivier": "mongodb",
     "host": "localhost",
-    "port": "27017",
+    "port": "27100",
     "user": "user",
     "pass": "password",
     "name": "users"
