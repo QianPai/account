@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/mongodb/mongo-go-driver/mongo/readpref"
 	"github.com/sirupsen/logrus"
@@ -39,7 +40,8 @@ func NewDefaultClient() (interface{}, error) {
 }
 
 func NewMongoClient(host string, port string) (*mongo.Client, error) {
-	client, err := mongo.NewClient("mongodb://localhost:27017")
+	url := fmt.Sprintf("mongodb://%s:%s", host, port)
+	client, err := mongo.NewClient(url)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	err = client.Connect(ctx)
 	ctx, _ = context.WithTimeout(context.Background(), 2*time.Second)

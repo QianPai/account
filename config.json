@@ -9,10 +9,9 @@
   "database": {
     "drivier": "mongodb",
     "host": "localhost",
-    "port": "27100",
+    "port": "27017",
     "user": "user",
     "pass": "password",
     "name": "users"
   }
-
 }
