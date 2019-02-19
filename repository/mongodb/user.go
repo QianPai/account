@@ -17,7 +17,7 @@ func NewUserRepository(client *mongo.Client) repository.User  {
  	return &user{client}
 }
 
-func (u *user) GetById(ctx context.Context, id interface{}) (res model.User, err error){
+func (u *user) GetById(ctx context.Context, id interface{}) (res *model.User, err error){
 	collection := u.Client.Database("users").Collection("users")
 	filter := bson.M{"_id" : id}
 	err = collection.FindOne(ctx, filter).Decode(&res)
@@ -27,7 +27,7 @@ func (u *user) GetById(ctx context.Context, id interface{}) (res model.User, err
 	return
 }
 
-func (u *user) GetByPhone(ctx context.Context, phone string) (res model.User, err error){
+func (u *user) GetByPhone(ctx context.Context, phone string) (res *model.User, err error){
 	collection := u.Client.Database("users").Collection("users")
 	filter := bson.M{"phone" : phone}
 	err = collection.FindOne(ctx, filter).Decode(&res)
@@ -37,7 +37,7 @@ func (u *user) GetByPhone(ctx context.Context, phone string) (res model.User, er
 	return
 }
 
-func (u *user) GetByName(ctx context.Context, name string) (res model.User, err error){
+func (u *user) GetByName(ctx context.Context, name string) (res *model.User, err error){
 	collection := u.Client.Database("users").Collection("users")
 	filter := bson.M{"name" : name}
 	err = collection.FindOne(ctx, filter).Decode(&res)
@@ -47,7 +47,7 @@ func (u *user) GetByName(ctx context.Context, name string) (res model.User, err 
 	return
 }
 
-func (u *user) Update(ctx context.Context, user model.User) (err error){
+func (u *user) Update(ctx context.Context, user *model.User) (err error){
 	collection := u.Client.Database("users").Collection("users")
 	filter := bson.M{"name" : '1'}
 	var res model.User
@@ -58,7 +58,7 @@ func (u *user) Update(ctx context.Context, user model.User) (err error){
 	return
 }
 
-func (u *user) Store(ctx context.Context, user model.User) (err error){
+func (u *user) Store(ctx context.Context, user *model.User) (err error){
 	collection := u.Client.Database("users").Collection("users")
 	filter := bson.M{"name" : '1'}
 	var res model.User
