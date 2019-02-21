@@ -25,7 +25,7 @@ func NewUserHandler(router gin.Engine, userUsecase usecase.User)  {
 func (u *UserHandler) GetByName(c *gin.Context) {
 	name := c.Param("name")
 	user, err := u.UserUsecase.GetByName(c, name)
-	if err == nil {
+	if err != nil {
 		c.JSON(http.StatusOK ,gin.H{
 			"status": "fail",
 			"data" : nil,
