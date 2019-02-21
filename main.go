@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/QianPai/account/repository"
 	"github.com/QianPai/account/repository/mongodb"
+	"github.com/QianPai/account/usecase/impl"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/spf13/viper"
 	"time"
@@ -26,8 +27,10 @@ func init()  {
 func main()  {
 	dbClient,err := repository.NewDefaultClient()
 	userRepository := mongodb.NewUserRepository(dbClient.(*mongo.Client))
+	userUsecase := impl.NewUserUsecase(userRepository, 2*time.Second)
 	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
-	user, err := userRepository.GetByName(ctx, "Gordon")
+	user, err := userUsecase.GetByName(ctx, "Gordon")
+	//user, err := userRepository.GetByName(ctx, "Gordon")
 	fmt.Println(user.Phone, err)
 	//collection := client.Database("users").Collection("users")
 	//ctx, _ = context.WithTimeout(context.Background(), 5*time.Second)

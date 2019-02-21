@@ -30,3 +30,15 @@ func (u userUsecase) GetById(c context.Context, id interface{}) (*model.User, er
 
 	return res, err
 }
+
+func (u userUsecase) GetByName(c context.Context, name string) (*model.User, error) {
+	ctx, cancel := context.WithTimeout(c, u.contextTimeout)
+	defer cancel()
+
+	res,err := u.userRepo.GetByName(ctx, name)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, err
+}
