@@ -42,3 +42,15 @@ func (u userUsecase) GetByName(c context.Context, name string) (*model.User, err
 
 	return res, err
 }
+
+func (u userUsecase) Store(c context.Context, user *model.User) error {
+	ctx, cancel := context.WithTimeout(c, u.contextTimeout)
+	defer cancel()
+
+	err := u.userRepo.Store(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
