@@ -22,6 +22,7 @@ func NewUserHandler(router gin.Engine, userUsecase usecase.User)  {
 	}
 
     router.GET("/user/:name", handler.GetByName)
+	router.POST("/user", handler.Store)
 }
 
 func (u *UserHandler) GetByName(c *gin.Context) {
@@ -52,7 +53,7 @@ func (u *UserHandler) Store(c *gin.Context) {
 		UpdatedAt:time.Now().String(),
 	}
 
-	res, err := u.UserUsecase.Store(c, user)
+	err := u.UserUsecase.Store(c, user)
 
 	if err != nil {
 		c.JSON(http.StatusOK ,gin.H{
@@ -62,7 +63,7 @@ func (u *UserHandler) Store(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK ,gin.H{
 		"status": "success",
-		"data" : res,
+		"data" : user,
 	})
 }
 

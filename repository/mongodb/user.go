@@ -60,12 +60,18 @@ func (u *user) Update(ctx context.Context, user *model.User) (err error){
 
 func (u *user) Store(ctx context.Context, user *model.User) (err error){
 	collection := u.Client.Database("users").Collection("users")
-	filter := bson.M{"name" : '1'}
-	var res model.User
-	err = collection.FindOne(ctx, filter).Decode(&res)
-	if err != nil {
-		log.Fatalf("can't get user by id:  %v, err: %v", '2', err)
+	data := bson.M{
+		"name": user.Name,
+		"phone": user.Phone,
+		"password": user.Password,
+		"created_at": user.CreatedAt,
+		"updated_at": user.CreatedAt,
 	}
+	res, err := collection.InsertOne(ctx, data)
+	if err != nil {
+		log.Fatalf("insert new user fail:  %v, err: %v", user.Phone, err)
+	}
+	user.ID = res.InsertedID
 	return
 }
 
