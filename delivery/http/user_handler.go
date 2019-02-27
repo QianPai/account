@@ -21,14 +21,23 @@ func NewUserHandler(router gin.Engine, userUsecase usecase.User)  {
 		UserUsecase: userUsecase,
 	}
 
-	router.GET("/user/phone/:phone", handler.GetByPhone)
-    router.GET("/user/name/:name", handler.GetByName)
+	router.GET("/user", handler.GetUser)
+    router.GET("/user/:id", handler.GetById)
 	router.POST("/user", handler.Store)
 }
 
-func (u *UserHandler) GetByName(c *gin.Context) {
-	name := c.Param("name")
-	user, err := u.UserUsecase.GetByName(c, name)
+func (u *UserHandler) GetUser(c *gin.Context) {
+	var user *model.User
+	var err error
+	name := c.Query("name")
+	if name != "" {
+		user, err = u.UserUsecase.GetByName(c, name)
+	}
+
+	phone := c.Query("phone")
+	if phone != "" {
+		user, err = u.UserUsecase.GetByPhone(c, phone)
+	}
 	if err != nil {
 		c.JSON(http.StatusOK ,gin.H{
 			"status": "fail",
@@ -41,9 +50,9 @@ func (u *UserHandler) GetByName(c *gin.Context) {
 	})
 }
 
-func (u *UserHandler) GetByPhone(c *gin.Context) {
-	phone := c.Param("phone")
-	user, err := u.UserUsecase.GetByPhone(c, phone)
+func (u *UserHandler) GetById(c *gin.Context) {
+	id := c.Param("id")
+	user, err := u.UserUsecase.GetById(c, id)
 	if err != nil {
 		c.JSON(http.StatusOK ,gin.H{
 			"status": "fail",

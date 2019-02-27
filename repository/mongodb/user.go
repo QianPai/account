@@ -22,7 +22,7 @@ func (u *user) GetById(ctx context.Context, id interface{}) (res *model.User, er
 	filter := bson.M{"_id" : id}
 	err = collection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
-		log.Fatalf("can't get user by id:  %v, err: %v", id, err)
+		log.Printf("can't get user by id:  %v, err: %v", id, err)
 	}
 	return
 }
@@ -32,7 +32,7 @@ func (u *user) GetByPhone(ctx context.Context, phone string) (res *model.User, e
 	filter := bson.M{"phone" : phone}
 	err = collection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
-		log.Fatalf("can't get user by phone:  %v, err: %v", phone, err)
+		log.Printf("can't get user by phone:  %v, err: %v", phone, err)
 	}
 	return
 }
@@ -42,7 +42,7 @@ func (u *user) GetByName(ctx context.Context, name string) (res *model.User, err
 	filter := bson.M{"name" : name}
 	err = collection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
-		log.Fatalf("can't get user by name:  %v, err: %v", name, err)
+		log.Printf("can't get user by name:  %v, err: %v", name, err)
 	}
 	return
 }
@@ -53,7 +53,7 @@ func (u *user) Update(ctx context.Context, user *model.User) (err error){
 	var res model.User
 	err = collection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
-		log.Fatalf("can't get user by id:  %v, err: %v", '2', err)
+		log.Printf("can't get user by id:  %v, err: %v", '2', err)
 	}
 	return
 }
@@ -69,7 +69,7 @@ func (u *user) Store(ctx context.Context, user *model.User) (err error){
 	}
 	res, err := collection.InsertOne(ctx, data)
 	if err != nil {
-		log.Fatalf("insert new user fail:  %v, err: %v", user.Phone, err)
+		log.Printf("insert new user fail:  %v, err: %v", user.Phone, err)
 	}
 	user.ID = res.InsertedID
 	return
@@ -81,7 +81,7 @@ func (u *user) Delete(ctx context.Context, id interface{}) (err error){
 	var res model.User
 	err = collection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
-		log.Fatalf("can't get user by id:  %v, err: %v", id, err)
+		log.Printf("can't get user by id:  %v, err: %v", id, err)
 	}
 	return
 }
