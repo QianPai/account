@@ -21,13 +21,29 @@ func NewUserHandler(router gin.Engine, userUsecase usecase.User)  {
 		UserUsecase: userUsecase,
 	}
 
-    router.GET("/user/:name", handler.GetByName)
+	router.GET("/user/phone/:phone", handler.GetByPhone)
+    router.GET("/user/name/:name", handler.GetByName)
 	router.POST("/user", handler.Store)
 }
 
 func (u *UserHandler) GetByName(c *gin.Context) {
 	name := c.Param("name")
 	user, err := u.UserUsecase.GetByName(c, name)
+	if err != nil {
+		c.JSON(http.StatusOK ,gin.H{
+			"status": "fail",
+			"data" : nil,
+		})
+	}
+	c.JSON(http.StatusOK ,gin.H{
+		"status": "success",
+		"data" : user,
+	})
+}
+
+func (u *UserHandler) GetByPhone(c *gin.Context) {
+	phone := c.Param("phone")
+	user, err := u.UserUsecase.GetByPhone(c, phone)
 	if err != nil {
 		c.JSON(http.StatusOK ,gin.H{
 			"status": "fail",

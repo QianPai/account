@@ -43,6 +43,18 @@ func (u userUsecase) GetByName(c context.Context, name string) (*model.User, err
 	return res, err
 }
 
+func (u userUsecase) GetByPhone(c context.Context, phone string) (*model.User, error) {
+	ctx, cancel := context.WithTimeout(c, u.contextTimeout)
+	defer cancel()
+
+	res,err := u.userRepo.GetByPhone(ctx, phone)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, err
+}
+
 func (u userUsecase) Store(c context.Context, user *model.User) error {
 	ctx, cancel := context.WithTimeout(c, u.contextTimeout)
 	defer cancel()
