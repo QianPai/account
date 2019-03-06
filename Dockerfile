@@ -1,6 +1,6 @@
 # Accept the Go version for the image to be set as a build argument.
 # Default to Go 1.11
-ARG GO_VERSION=1.11
+ARG GO_VERSION=1.12
 
 # First stage: build the executable.
 FROM golang:${GO_VERSION}-alpine AS builder
@@ -29,8 +29,7 @@ COPY ./ ./
 # Build the executable to `/app`. Mark the build as statically linked.
 RUN go build \
     -installsuffix 'static' \
-    -o /app .
-
+    -o /app app.
 # Final stage: the running container.
 FROM scratch AS final
 
