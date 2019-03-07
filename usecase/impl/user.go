@@ -66,3 +66,15 @@ func (u userUsecase) Store(c context.Context, user *model.User) error {
 
 	return nil
 }
+
+func (u userUsecase) Update(c context.Context, user *model.User) error {
+	ctx, cancel := context.WithTimeout(c, u.contextTimeout)
+	defer cancel()
+
+	err := u.userRepo.Update(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

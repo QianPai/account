@@ -24,6 +24,7 @@ func NewUserHandler(router gin.Engine, userUsecase usecase.User)  {
 	router.GET("/user", handler.GetUser)
     router.GET("/user/:id", handler.GetById)
 	router.POST("/user", handler.Store)
+	router.PUT("/user", handler.Update)
 }
 
 func (u *UserHandler) GetUser(c *gin.Context) {
@@ -92,3 +93,29 @@ func (u *UserHandler) Store(c *gin.Context) {
 	})
 }
 
+func (u *UserHandler) Update(c *gin.Context) {
+	name := c.PostForm("name")
+	phone := c.PostForm("phone")
+	password := c.PostForm("password")
+
+	user := &model.User{
+		Name:name,
+		Phone:phone,
+		Password:password,
+		CreatedAt:time.Now().String(),
+		UpdatedAt:time.Now().String(),
+	}
+
+	err := u.UserUsecase.Update(c, user)
+
+	if err != nil {
+		c.JSON(http.StatusOK ,gin.H{
+			"status": "fail",
+			"data" : nil,
+		})
+	}
+	c.JSON(http.StatusOK ,gin.H{
+		"status": "success",
+		"data" : user,
+	})
+}

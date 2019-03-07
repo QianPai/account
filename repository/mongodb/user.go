@@ -49,9 +49,8 @@ func (u *user) GetByName(ctx context.Context, name string) (res *model.User, err
 
 func (u *user) Update(ctx context.Context, user *model.User) (err error){
 	collection := u.Client.Database("users").Collection("users")
-	filter := bson.M{"name" : '1'}
-	var res model.User
-	err = collection.FindOne(ctx, filter).Decode(&res)
+	filter := bson.M{"_id" : user.ID}
+	res, err := collection.UpdateOne(ctx, filter, user)
 	if err != nil {
 		log.Printf("can't get user by id:  %v, err: %v", '2', err)
 	}
